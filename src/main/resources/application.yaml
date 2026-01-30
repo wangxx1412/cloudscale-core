@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    # Points to the 'db' service defined in docker-compose
+    url: jdbc:postgresql://localhost:5432/cloudscale
+    username: admin
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# Custom application properties
+app:
+  api:
+    key: "YOUR_FREE_ALPHA_VANTAGE_KEY"
+
+# Actuator for monitoring (Observability)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
