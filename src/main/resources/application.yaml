@@ -19,7 +19,7 @@ spring:
 # Custom application properties
 app:
   api:
-    key: "YOUR_FREE_ALPHA_VANTAGE_KEY"
+    key: "GRZCU4HUR37FBW8N"
 
 # Actuator for monitoring (Observability)
 management:
