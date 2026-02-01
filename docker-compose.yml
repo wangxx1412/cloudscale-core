@@ -1,24 +1,28 @@
 services:
-  # Database for storing your portfolios and transactions
+  app:
+    image: cloudscale-backend
+    container_name: cloudscale-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/cloudscale
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=secret
+      # Pass your API Key as an environment variable (Better practice!)
+      - APP_API_KEY="GRZCU4HUR37FBW8N"
+    depends_on:
+      - db
+
   db:
     image: postgres:15-alpine
     container_name: cloudscale-db
-    restart: always
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=cloudscale
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
-  # Cache layer for market data to reduce API calls
   cache:
     image: redis:7-alpine
     container_name: cloudscale-redis
-    ports:
-      - "6379:6379"
-
-volumes:
-  postgres_data:
